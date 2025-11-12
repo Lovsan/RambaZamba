@@ -1,6 +1,14 @@
 # RambaZamba
 collection of networking tools.
 
+# Usage Instructions
+Make scripts executable and run setup:
+
+bash
+chmod +x *.sh
+./quick_setup.sh
+
+
 After setup, you can monitor activities with:
 
 bash
