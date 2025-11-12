@@ -29,8 +29,8 @@ A comprehensive security and remote management toolkit designed for Termux on An
 ### Quick Setup
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/termux-toolkit.git
-cd termux-toolkit
+git clone https://github.com/lovsan/RambaZamba.git
+cd RambaZamba
 
 # Run the installation script
 chmod +x install_all.sh
