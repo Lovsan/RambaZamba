@@ -1,25 +1,36 @@
-# RambaZamba
-collection of networking tools.
+# Termux Security & Management Toolkit
 
-# Usage Instructions
-Make scripts executable and run setup:
+A comprehensive security and remote management toolkit designed for Termux on Android devices. This toolkit provides network scanning, vulnerability assessment, honeypot capabilities, Bluetooth monitoring, and remote system management.
 
-bash
-chmod +x *.sh
-./quick_setup.sh
+## 🚀 Features
 
+### Security Tools
+- **Network Scanning**: Real-time network discovery and port scanning
+- **Vulnerability Assessment**: Automated vulnerability scanning
+- **Honeypot Systems**: Multi-service honeypots with real-time monitoring
+- **Bluetooth Reconnaissance**: Bluetooth device discovery and monitoring
+- **Traffic Analysis**: Network traffic monitoring and analysis
 
-After setup, you can monitor activities with:
+### Remote Management
+- **Multi-System Management**: Manage multiple remote systems
+- **Command Execution**: Run commands across multiple systems
+- **Status Monitoring**: Real-time system status tracking
+- **Screenshot Capture**: Remote screenshot functionality (where supported)
+- **Database Backend**: SQLite database for storing system information
+- **Quick Commands**: Predefined command templates for common tasks
 
-bash
-# View honeypot logs
-tail -f honeypot.log
+## 📦 Installation
 
-# View network traffic
-tail -f network_traffic.log
+### Prerequisites
+- Termux app installed from F-Droid or Play Store
+- Basic Termux setup completed
 
-# View connection attempts  
-tail -f connection_attempts.log
+### Quick Setup
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/termux-toolkit.git
+cd termux-toolkit
 
-# Live dashboard
-python monitoring_dashboard.py
+# Run the installation script
+chmod +x install_all.sh
+./install_all.sh
