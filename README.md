@@ -35,3 +35,17 @@ cd RambaZamba
 # Run the installation script
 chmod +x install_all.sh
 ./install_all.sh
+```
+
+### Manual installation
+```bash
+# Update packages
+pkg update && pkg upgrade
+
+# Install dependencies
+pkg install python nmap git bluez bluez-utils sqlite
+
+# Install Python packages
+pip install paramiko pillow pyautogui
+```
+
