@@ -5,11 +5,11 @@ echo "[+] Starting security tools installation..."
 pkg update -y && pkg upgrade -y
 
 # Install essential dependencies
-pkg install -y python git curl wget nmap nodejs rust golang
+pkg install -y python git curl wget nmap nodejs rust golang termux-api
 
 # Install Python packages
 pip install --upgrade pip
-pip install requests beautifulsoup4 scapy python-nmap
+pip install requests beautifulsoup4 scapy python-nmap flask twisted netaddr
 
 # Security tools installation
 echo "[+] Installing security tools..."
@@ -51,11 +51,47 @@ echo "[+] Sublist3r installed"
 git clone https://github.com/v0re/dirb
 echo "[+] Dirb wordlists installed"
 
+# Install Honeypot tools
+echo "[+] Installing honeypot tools..."
+
+# Install Cowrie
+git clone https://github.com/cowrie/cowrie
+cd cowrie
+pip install -r requirements.txt
+cd ..
+echo "[+] Cowrie installed"
+
+# Install T-Pot dependencies
+pip install pyinotify psutil
+
+# Install SSH Honeypot
+git clone https://github.com/desaster/kippo
+echo "[+] Kippo installed"
+
+# Install Dionaea (simplified)
+git clone https://github.com/DinoTools/dionaea
+echo "[+] Dionaea installed"
+
+# Install Monitoring tools
+echo "[+] Installing monitoring tools..."
+
+# Install Termux-API for device monitoring
+pkg install -y termux-api
+echo "[+] Termux-API installed"
+
+# Install Network monitoring tools
+pip install pyattacker netifaces
+git clone https://github.com/itsmehacker/DarkSpy
+echo "[+] DarkSpy installed"
+
+# Install Log analysis tools
+pip install loganalyzer
+
 # Install Metasploit (Termux version)
 wget https://raw.githubusercontent.com/gushmazuko/metasploit_in_termux/master/metasploit.sh
 chmod +x metasploit.sh
 echo "[+] Metasploit installer downloaded"
 
 echo "[!] Installation complete!"
-echo "[!] Run: chmod +x scan_network.sh vulnerability_scan.sh"
-echo "[!] Then run: ./scan_network.sh"
+echo "[!] Run: chmod +x scan_network.sh vulnerability_scan.sh honeypot_setup.sh"
+echo "[!] Then run: ./honeypot_setup.sh"
