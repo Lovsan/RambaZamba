@@ -1,51 +1,62 @@
-# RAMBAZAMBA - the the ultimate networking tools.
-# Termux Security & Management Toolkit
+🌟 Features Overview
+🔧 Core Proxy Management
+Multi-Protocol Support: HTTP, HTTPS, SOCKS4, SOCKS5 proxies
 
-A comprehensive security and remote management toolkit designed for Termux on Android devices. This toolkit provides network scanning, vulnerability assessment, honeypot capabilities, Bluetooth monitoring, and remote system management.
+Batch Testing: Test hundreds of proxies simultaneously with configurable timeouts
 
-## 🚀 Features
+Smart Filtering: Filter by status, speed, type, country, and custom criteria
 
-### Security Tools
-- **Network Scanning**: Real-time network discovery and port scanning
-- **Vulnerability Assessment**: Automated vulnerability scanning
-- **Honeypot Systems**: Multi-service honeypots with real-time monitoring
-- **Bluetooth Reconnaissance**: Bluetooth device discovery and monitoring
-- **Traffic Analysis**: Network traffic monitoring and analysis
+GeoIP Integration: Automatic location detection with city-level accuracy
 
-### Remote Management
-- **Multi-System Management**: Manage multiple remote systems
-- **Command Execution**: Run commands across multiple systems
-- **Status Monitoring**: Real-time system status tracking
-- **Screenshot Capture**: Remote screenshot functionality (where supported)
-- **Database Backend**: SQLite database for storing system information
-- **Quick Commands**: Predefined command templates for common tasks
+Export Capabilities: Save working proxies in TXT, JSON, CSV formats
 
-## 📦 Installation
+🌐 Advanced Network Tools
+Proxy Discovery: Automated proxy harvesting from multiple sources
 
-### Prerequisites
-- Termux app installed from F-Droid or Play Store
-- Basic Termux setup completed
+Nmap Integration: Port scanning and service detection
 
-### Quick Setup
-```bash
-# Clone the repository
-git clone https://github.com/lovsan/RambaZamba.git
-cd RambaZamba
+Network Analysis: DNS lookup, WHOIS, traceroute, and ping tools
 
-# Run the installation script
-chmod +x install_all.sh
-./install_all.sh
-```
+Speed Testing: Download/upload speed measurement through proxies
 
-### Manual installation
-```bash
-# Update packages
-pkg update && pkg upgrade
+SSL/TLS Analysis: Certificate and encryption strength testing
 
-# Install dependencies
-pkg install python nmap git bluez bluez-utils sqlite
+🛡️ Security Assessment
+Vulnerability Scanner: Automated security vulnerability detection
 
-# Install Python packages
-pip install paramiko pillow pyautogui
-```
+Custom Headers: Advanced HTTP header manipulation and testing
 
+Security Scoring: Proxy security rating based on multiple factors
+
+Brute Force Detection: Identify and test for common attack vectors
+
+⛓️ Advanced Features
+Proxy Chain Builder: Create multi-hop proxy chains for enhanced anonymity
+
+System Integration: Windows system proxy management with one-click setup
+
+Real-time Monitoring: Live system resource and network monitoring
+
+Interactive Globe: 3D visualization of proxy locations worldwide
+
+Theme Support: Multiple UI themes (Dark, Terminal, Blood, Ultraviolet, Light)
+
+💻 System Integration
+Windows Proxy Management: Direct registry integration for system proxy control
+
+Emergency Repair: Fix corrupted proxy settings with one click
+
+Backup/Restore: Save and restore system proxy configurations
+
+Thread Management: Configurable thread pools for optimal performance
+
+🚀 Quick Start
+Prerequisites
+Python 3.8 or higher
+
+Windows 10/11 (primary platform) or Linux/macOS (limited features)
+
+Administrator privileges (for system proxy management)
+
+Installation
+Clone or Download the Project
