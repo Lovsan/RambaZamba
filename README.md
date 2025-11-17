@@ -1,62 +1,177 @@
-🌟 Features Overview
-🔧 Core Proxy Management
-Multi-Protocol Support: HTTP, HTTPS, SOCKS4, SOCKS5 proxies
+# RambaZamba - Advanced Networking Tools Collection
 
-Batch Testing: Test hundreds of proxies simultaneously with configurable timeouts
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/Lovsan/RambaZamba.svg)](https://github.com/Lovsan/RambaZamba/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/Lovsan/RambaZamba.svg)](https://github.com/Lovsan/RambaZamba/issues)
 
-Smart Filtering: Filter by status, speed, type, country, and custom criteria
+A comprehensive suite of networking tools designed for security testing, network analysis, and proxy management. Built with Python and Bash scripts for maximum flexibility and performance.
 
-GeoIP Integration: Automatic location detection with city-level accuracy
+## 🌟 Key Features
 
-Export Capabilities: Save working proxies in TXT, JSON, CSV formats
+### 🔧 Core Proxy Management
+- **Multi-Protocol Support**: HTTP, HTTPS, SOCKS4, SOCKS5 proxies
+- **Batch Testing**: Test hundreds of proxies simultaneously with configurable timeouts
+- **Smart Filtering**: Filter by status, speed, type, country, and custom criteria
+- **GeoIP Integration**: Automatic location detection with city-level accuracy
+- **Export Capabilities**: Save working proxies in TXT, JSON, CSV formats
 
-🌐 Advanced Network Tools
-Proxy Discovery: Automated proxy harvesting from multiple sources
+### 🌐 Advanced Network Tools
+- **Proxy Discovery**: Automated proxy harvesting from multiple sources
+- **Nmap Integration**: Port scanning and service detection
+- **Network Analysis**: DNS lookup, WHOIS, traceroute, and ping tools
+- **Speed Testing**: Download/upload speed measurement through proxies
+- **SSL/TLS Analysis**: Certificate and encryption strength testing
 
-Nmap Integration: Port scanning and service detection
+### 🛡️ Security Assessment
+- **Vulnerability Scanner**: Automated security vulnerability detection
+- **Custom Headers**: Advanced HTTP header manipulation and testing
+- **Security Scoring**: Proxy security rating based on multiple factors
+- **Brute Force Detection**: Identify and test for common attack vectors
 
-Network Analysis: DNS lookup, WHOIS, traceroute, and ping tools
+### ⛓️ Advanced Features
+- **Proxy Chain Builder**: Create multi-hop proxy chains for enhanced anonymity
+- **System Integration**: Windows system proxy management with one-click setup
+- **Real-time Monitoring**: Live system resource and network monitoring
+- **Interactive Globe**: 3D visualization of proxy locations worldwide
+- **Theme Support**: Multiple UI themes (Dark, Terminal, Blood, Ultraviolet, Light)
 
-Speed Testing: Download/upload speed measurement through proxies
+### 💻 System Integration
+- **Windows Proxy Management**: Direct registry integration for system proxy control
+- **Emergency Repair**: Fix corrupted proxy settings with one click
+- **Backup/Restore**: Save and restore system proxy configurations
+- **Thread Management**: Configurable thread pools for optimal performance
 
-SSL/TLS Analysis: Certificate and encryption strength testing
+## 🚀 Quick Start
 
-🛡️ Security Assessment
-Vulnerability Scanner: Automated security vulnerability detection
+### Prerequisites
+- Python 3.8 or higher
+- Windows 10/11 (primary platform) or Linux/macOS (limited features)
+- Administrator privileges (for system proxy management)
 
-Custom Headers: Advanced HTTP header manipulation and testing
+### Installation
 
-Security Scoring: Proxy security rating based on multiple factors
+1. **Clone or Download the Project**
+   ```bash
+   git clone https://github.com/Lovsan/RambaZamba.git
+   cd RambaZamba
+   ```
 
-Brute Force Detection: Identify and test for common attack vectors
+2. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-⛓️ Advanced Features
-Proxy Chain Builder: Create multi-hop proxy chains for enhanced anonymity
+   Or use the provided installation script:
+   ```bash
+   ./install_tools.sh
+   ```
 
-System Integration: Windows system proxy management with one-click setup
+3. **Run the Setup**
+   ```bash
+   ./quick_setup.sh
+   ```
 
-Real-time Monitoring: Live system resource and network monitoring
+## 📖 Usage
 
-Interactive Globe: 3D visualization of proxy locations worldwide
+### Proxy Tools
+Run the main proxy tool:
+```bash
+python proxy_tool_v1.0.py
+```
 
-Theme Support: Multiple UI themes (Dark, Terminal, Blood, Ultraviolet, Light)
+### Honeybot Deployment
+Deploy a lightweight honeybot:
+```bash
+python lightweight_honeybot.py
+```
 
-💻 System Integration
-Windows Proxy Management: Direct registry integration for system proxy control
+### Network Scanning
+Perform a network scan:
+```bash
+./network_scan.sh
+```
 
-Emergency Repair: Fix corrupted proxy settings with one click
+### Real-time Monitoring
+Monitor network in real-time:
+```bash
+python realtime_network.py
+```
 
-Backup/Restore: Save and restore system proxy configurations
+## 📸 Screenshots
 
-Thread Management: Configurable thread pools for optimal performance
+### Main Dashboard
+![Main Dashboard Screenshot](screenshots/main_dashboard.png)
+*The main interface showing proxy management and network tools.*
 
-🚀 Quick Start
-Prerequisites
-Python 3.8 or higher
+### Proxy Testing Interface
+![Proxy Testing Screenshot](screenshots/proxy_testing.png)
+*Real-time proxy testing with filtering and export options.*
 
-Windows 10/11 (primary platform) or Linux/macOS (limited features)
+### Network Scanning Results
+![Network Scan Screenshot](screenshots/network_scan.png)
+*Detailed network scan results with vulnerability assessment.*
 
-Administrator privileges (for system proxy management)
+### Honeybot Configuration
+![Honeybot Config Screenshot](screenshots/honeybot_config.png)
+*Honeybot setup and monitoring interface.*
 
-Installation
-Clone or Download the Project
+### Real-time Bluetooth Monitoring
+![Bluetooth Monitoring Screenshot](screenshots/bluetooth_monitor.png)
+*Live Bluetooth device scanning and analysis.*
+
+### System Resource Dashboard
+![System Dashboard Screenshot](screenshots/system_dashboard.png)
+*Comprehensive system and network resource monitoring.*
+
+## 🛠️ Tools Included
+
+| Tool | Description | Language |
+|------|-------------|----------|
+| `proxy_tool_v1.0.py` | Advanced proxy management and testing | Python |
+| `honeybot_setup.sh` | Honeybot deployment script | Bash |
+| `network_scan.sh` | Network scanning utilities | Bash |
+| `vulnerability_scan.sh` | Security vulnerability scanner | Bash |
+| `bluetooth_tools.sh` | Bluetooth device management | Bash |
+| `realtime_network.py` | Real-time network monitoring | Python |
+| `system_manager.py` | System integration manager | Python |
+| `master_dashboard.py` | Main dashboard interface | Python |
+
+## 🤝 Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Development Setup
+```bash
+# Install development dependencies
+pip install -r requirements-dev.txt
+
+# Run tests
+python -m pytest
+
+# Format code
+black .
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ⚠️ Disclaimer
+
+This toolkit is intended for educational and testing purposes only. Users are responsible for complying with applicable laws and regulations when using these tools. The authors assume no liability for misuse.
+
+## 🙏 Acknowledgments
+
+- Thanks to the open-source community for inspiration and contributions
+- Special thanks to contributors and testers
+
+---
+
+**Note**: Screenshots are placeholders. Replace with actual screenshots of your application in action.
