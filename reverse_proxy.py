@@ -22,6 +22,7 @@ import urllib.parse
 import urllib.request
 import urllib.error
 import random
+import argparse
 from datetime import datetime
 from collections import deque
 from dataclasses import dataclass, field
@@ -179,7 +180,26 @@ class ProxyPool:
 
     def add_proxy(self, host: str, port: int, proxy_type: str = "http",
                   username: Optional[str] = None, password: Optional[str] = None) -> bool:
-        """Add a proxy to the pool"""
+        """Add a proxy to the pool
+        
+        Args:
+            host: Proxy host address
+            port: Proxy port number
+            proxy_type: Type of proxy (http, https, socks4, socks5)
+            username: Optional username for authentication
+            password: Optional password for authentication
+            
+        Returns:
+            True if proxy was added, False if duplicate or invalid type
+        """
+        # Validate proxy type
+        valid_types = {"http", "https", "socks4", "socks5"}
+        if proxy_type.lower() not in valid_types:
+            logger.warning(f"Invalid proxy type '{proxy_type}'. Must be one of: {valid_types}")
+            return False
+        
+        proxy_type = proxy_type.lower()
+        
         with self._lock:
             # Check for duplicates
             for proxy in self.proxies:
@@ -267,7 +287,10 @@ class ProxyPool:
     def validate_all_proxies(self):
         """Validate all proxies in the pool"""
         logger.info("Validating all proxies...")
-        for proxy in self.proxies[:]:  # Use slice to avoid modification during iteration
+        # Create a copy of the list for iteration since validate_proxy may modify 
+        # proxy.is_active status which affects iteration over active proxies
+        proxies_snapshot = self.proxies[:]
+        for proxy in proxies_snapshot:
             self.validate_proxy(proxy)
         
         active_count = len([p for p in self.proxies if p.is_active])
@@ -674,11 +697,12 @@ Commands:
 
 def format_bytes(num_bytes: int) -> str:
     """Format bytes to human readable string"""
+    size = float(num_bytes)
     for unit in ['B', 'KB', 'MB', 'GB']:
-        if num_bytes < 1024:
-            return f"{num_bytes:.2f} {unit}"
-        num_bytes /= 1024
-    return f"{num_bytes:.2f} TB"
+        if size < 1024:
+            return f"{size:.2f} {unit}"
+        size /= 1024
+    return f"{size:.2f} TB"
 
 
 def interactive_mode(proxy: ReverseProxy):
@@ -860,8 +884,6 @@ def interactive_mode(proxy: ReverseProxy):
 
 def main():
     """Main entry point"""
-    import argparse
-    
     parser = argparse.ArgumentParser(
         description="Reverse Proxy with Traffic Monitoring and Proxy Rotation"
     )
