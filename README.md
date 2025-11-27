@@ -31,6 +31,9 @@ A comprehensive suite of networking tools designed for security testing, network
 
 ### ⛓️ Advanced Features
 - **Proxy Chain Builder**: Create multi-hop proxy chains for enhanced anonymity
+- **Reverse Proxy System**: HTTP/HTTPS reverse proxy with traffic monitoring
+- **Automatic Proxy Rotation**: Configurable intervals for proxy switching
+- **Traffic Monitoring**: Real-time tracking of inbound/outbound traffic
 - **System Integration**: Windows system proxy management with one-click setup
 - **Real-time Monitoring**: Live system resource and network monitoring
 - **Interactive Globe**: 3D visualization of proxy locations worldwide
@@ -98,6 +101,29 @@ Monitor network in real-time:
 python realtime_network.py
 ```
 
+### Reverse Proxy
+Run the reverse proxy with traffic monitoring:
+```bash
+python reverse_proxy.py --target-host example.com --target-port 80
+```
+
+Or run in daemon mode with a proxy file:
+```bash
+python reverse_proxy.py --target-host api.example.com --target-port 443 --ssl --proxy-file proxies.txt --daemon
+```
+
+Interactive commands in the reverse proxy:
+- `start` - Start the reverse proxy server
+- `stop` - Stop the reverse proxy server  
+- `status` - Show current status and traffic statistics
+- `add <host:port>` - Add a proxy to the pool
+- `remove <host:port>` - Remove a proxy from the pool
+- `list` - List all proxies in the pool
+- `rotate` - Manually rotate to the next proxy
+- `validate` - Validate all proxies
+- `load <file>` - Load proxies from a file
+- `save <file>` - Save proxies to a file
+
 ## 📸 Screenshots
 
 ### Main Dashboard
@@ -129,6 +155,7 @@ python realtime_network.py
 | Tool | Description | Language |
 |------|-------------|----------|
 | `proxy_tool_v1.0.py` | Advanced proxy management and testing | Python |
+| `reverse_proxy.py` | Reverse proxy with traffic monitoring and auto-rotation | Python |
 | `honeybot_setup.sh` | Honeybot deployment script | Bash |
 | `network_scan.sh` | Network scanning utilities | Bash |
 | `vulnerability_scan.sh` | Security vulnerability scanner | Bash |
