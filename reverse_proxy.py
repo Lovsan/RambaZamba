@@ -265,6 +265,7 @@ class ReverseProxyServer:
             # Wrap with SSL if certificates provided
             if self.ssl_cert and self.ssl_key:
                 context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+                context.minimum_version = ssl.TLSVersion.TLSv1_2
                 context.load_cert_chain(self.ssl_cert, self.ssl_key)
                 server_socket = context.wrap_socket(server_socket, server_side=True)
                 self.logger.info(f"SSL/TLS enabled with certificate: {self.ssl_cert}")
