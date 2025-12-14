@@ -80,6 +80,21 @@ Run the main proxy tool:
 python proxy_tool_v1.0.py
 ```
 
+### Reverse Proxy Server
+Run the reverse proxy server:
+```bash
+# Interactive setup
+./setup_reverse_proxy.sh
+
+# Or directly with command line
+python3 reverse_proxy.py -b http://backend1:8001 -b http://backend2:8002
+
+# With configuration file
+python3 reverse_proxy.py -c reverse_proxy_config.json
+```
+
+See [REVERSE_PROXY_README.md](REVERSE_PROXY_README.md) for detailed documentation.
+
 ### Honeybot Deployment
 Deploy a lightweight honeybot:
 ```bash
@@ -129,6 +144,8 @@ python realtime_network.py
 | Tool | Description | Language |
 |------|-------------|----------|
 | `proxy_tool_v1.0.py` | Advanced proxy management and testing | Python |
+| `reverse_proxy.py` | HTTP/HTTPS reverse proxy with load balancing | Python |
+| `setup_reverse_proxy.sh` | Interactive reverse proxy setup and management | Bash |
 | `honeybot_setup.sh` | Honeybot deployment script | Bash |
 | `network_scan.sh` | Network scanning utilities | Bash |
 | `vulnerability_scan.sh` | Security vulnerability scanner | Bash |
