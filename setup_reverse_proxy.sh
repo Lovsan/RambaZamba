@@ -84,13 +84,15 @@ start_ssl() {
     read -p "Enter backend server URLs (comma-separated): " backends
     IFS=',' read -ra BACKEND_ARRAY <<< "$backends"
     
-    backend_args=""
+    backend_args=()
     for backend in "${BACKEND_ARRAY[@]}"; do
-        backend_args="$backend_args -b $(echo $backend | xargs)"
+        # Trim whitespace safely
+        trimmed=$(echo "$backend" | xargs)
+        backend_args+=("-b" "$trimmed")
     done
     
     echo -e "${YELLOW}Starting reverse proxy with SSL/TLS...${NC}"
-    python3 reverse_proxy.py -H "$host" -p "$port" --ssl-cert "$cert" --ssl-key "$key" $backend_args
+    python3 reverse_proxy.py -H "$host" -p "$port" --ssl-cert "$cert" --ssl-key "$key" "${backend_args[@]}"
 }
 
 # Test configuration
@@ -134,9 +136,11 @@ create_config() {
     read -p "Enter backend server URLs (comma-separated): " backends
     IFS=',' read -ra BACKEND_ARRAY <<< "$backends"
     
-    backend_args=""
+    backend_args=()
     for backend in "${BACKEND_ARRAY[@]}"; do
-        backend_args="$backend_args -b $(echo $backend | xargs)"
+        # Trim whitespace safely
+        trimmed=$(echo "$backend" | xargs)
+        backend_args+=("-b" "$trimmed")
     done
     
     read -p "Enter load balancing method (round-robin/least-conn, default: round-robin): " lb_method
@@ -146,7 +150,7 @@ create_config() {
     config_name=${config_name:-custom_proxy_config.json}
     
     echo -e "${YELLOW}Saving configuration to $config_name...${NC}"
-    python3 reverse_proxy.py -H "$host" -p "$port" $backend_args -l "$lb_method" --save-config "$config_name"
+    python3 reverse_proxy.py -H "$host" -p "$port" "${backend_args[@]}" -l "$lb_method" --save-config "$config_name"
     
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}Configuration saved successfully!${NC}"

@@ -34,9 +34,8 @@ class ReverseProxyServer:
             ssl_key: Path to SSL key file
             max_connections: Maximum concurrent connections
             timeout: Connection timeout in seconds
-            load_balance: Load balancing algorithm
-            log_file: Path to log file (default: reverse_proxy_PORT.log)
             load_balance: Load balancing algorithm (round-robin, least-conn)
+            log_file: Path to log file (default: reverse_proxy_PORT.log)
         """
         self.host = host
         self.port = port
