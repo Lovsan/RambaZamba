@@ -186,6 +186,19 @@ python -m pytest
 black .
 ```
 
+### Benchmarking and Testing
+
+The project includes comprehensive benchmarking tools:
+
+```bash
+# HTML5 parser fuzzing
+cd benchmarks
+python3 fuzz.py --sample 5  # Generate sample fuzzed HTML
+python3 fuzz.py --help      # See all options
+```
+
+See [benchmarks/README.md](benchmarks/README.md) for detailed documentation.
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
