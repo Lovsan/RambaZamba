@@ -104,10 +104,12 @@ test_config() {
     fi
     
     echo -e "${YELLOW}Testing configuration...${NC}"
-    python3 -c "
+    python3 - "$config_file" << 'EOF'
 import json
+import sys
 try:
-    with open('$config_file', 'r') as f:
+    config_file = sys.argv[1]
+    with open(config_file, 'r') as f:
         config = json.load(f)
     print('✓ Configuration file is valid JSON')
     print('  Host: ' + config.get('host', 'Not set'))
@@ -116,7 +118,7 @@ try:
     print('  Load Balance: ' + config.get('load_balance', 'Not set'))
 except Exception as e:
     print('✗ Configuration error: ' + str(e))
-    "
+EOF
 }
 
 # Create new configuration

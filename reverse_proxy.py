@@ -12,7 +12,6 @@ import argparse
 import json
 import logging
 import time
-from datetime import datetime
 from urllib.parse import urlparse
 import ssl
 import os
@@ -21,7 +20,8 @@ import sys
 class ReverseProxyServer:
     def __init__(self, config_file=None, host='0.0.0.0', port=8080, 
                  backend_servers=None, ssl_cert=None, ssl_key=None,
-                 max_connections=100, timeout=60, load_balance='round-robin'):
+                 max_connections=100, timeout=60, load_balance='round-robin',
+                 log_file=None):
         """
         Initialize the reverse proxy server.
         
@@ -34,6 +34,8 @@ class ReverseProxyServer:
             ssl_key: Path to SSL key file
             max_connections: Maximum concurrent connections
             timeout: Connection timeout in seconds
+            load_balance: Load balancing algorithm
+            log_file: Path to log file (default: reverse_proxy_PORT.log)
             load_balance: Load balancing algorithm (round-robin, least-conn)
         """
         self.host = host
@@ -48,6 +50,8 @@ class ReverseProxyServer:
         self.current_backend_index = 0
         self.backend_health = {}
         self.connection_counts = {}
+        self.lock = threading.Lock()  # Thread safety for shared state
+        self.log_file = log_file or f"reverse_proxy_{port}.log"
         
         # Load configuration from file if provided
         if config_file and os.path.exists(config_file):
@@ -62,13 +66,13 @@ class ReverseProxyServer:
         self.setup_logging()
         
     def setup_logging(self):
-        """Configure logging for the proxy server."""
+        """Configure logging for the proxy server with unique log file per instance."""
         log_format = '%(asctime)s - %(levelname)s - %(message)s'
         logging.basicConfig(
             level=logging.INFO,
             format=log_format,
             handlers=[
-                logging.FileHandler('reverse_proxy.log'),
+                logging.FileHandler(self.log_file),
                 logging.StreamHandler(sys.stdout)
             ]
         )
@@ -113,29 +117,31 @@ class ReverseProxyServer:
     def get_next_backend(self):
         """
         Select the next backend server based on load balancing algorithm.
+        Thread-safe implementation with lock protection.
         
         Returns:
             Backend server URL or None if no healthy servers available
         """
-        healthy_servers = [s for s in self.backend_servers if self.backend_health.get(s, True)]
-        
-        if not healthy_servers:
-            self.logger.warning("No healthy backend servers available")
-            return None
+        with self.lock:
+            healthy_servers = [s for s in self.backend_servers if self.backend_health.get(s, True)]
             
-        if self.load_balance_method == 'round-robin':
-            server = healthy_servers[self.current_backend_index % len(healthy_servers)]
-            self.current_backend_index += 1
-            return server
-            
-        elif self.load_balance_method == 'least-conn':
-            # Select server with least active connections
-            min_conn = min(self.connection_counts.get(s, 0) for s in healthy_servers)
-            for server in healthy_servers:
-                if self.connection_counts.get(server, 0) == min_conn:
-                    return server
-                    
-        return healthy_servers[0]
+            if not healthy_servers:
+                self.logger.warning("No healthy backend servers available")
+                return None
+                
+            if self.load_balance_method == 'round-robin':
+                server = healthy_servers[self.current_backend_index % len(healthy_servers)]
+                self.current_backend_index += 1
+                return server
+                
+            elif self.load_balance_method == 'least-conn':
+                # Select server with least active connections
+                min_conn = min(self.connection_counts.get(s, 0) for s in healthy_servers)
+                for server in healthy_servers:
+                    if self.connection_counts.get(server, 0) == min_conn:
+                        return server
+                        
+            return healthy_servers[0]
         
     def health_check(self):
         """Perform health checks on all backend servers."""
@@ -213,8 +219,9 @@ class ReverseProxyServer:
             backend_socket.settimeout(self.timeout)
             backend_socket.connect((backend_host, backend_port))
             
-            # Increment connection count
-            self.connection_counts[backend_server] = self.connection_counts.get(backend_server, 0) + 1
+            # Increment connection count (thread-safe)
+            with self.lock:
+                self.connection_counts[backend_server] = self.connection_counts.get(backend_server, 0) + 1
             
             # Create forwarding threads
             client_to_server = threading.Thread(
@@ -240,9 +247,10 @@ class ReverseProxyServer:
             self.logger.error(f"Error handling client {client_address}: {e}")
             
         finally:
-            # Clean up
+            # Clean up (thread-safe)
             if backend_server:
-                self.connection_counts[backend_server] = max(0, self.connection_counts.get(backend_server, 1) - 1)
+                with self.lock:
+                    self.connection_counts[backend_server] = max(0, self.connection_counts.get(backend_server, 0) - 1)
             
             try:
                 if backend_socket:
